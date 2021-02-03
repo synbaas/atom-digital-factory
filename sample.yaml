@@ -1,0 +1,51 @@
+---
+swagger: 2.0
+info:
+  description: Event Publisher API
+  version: 1.0.0
+  title: Event Publisher API
+  contact:
+    email: atom_core_team@atos.net
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: developers
+  description: Operations available to regular developers
+schemes:
+- https
+paths:
+  /publish:
+    post:
+      tags:
+      - developers
+      summary: Event Publisher Service
+      description: service description
+      operationId: publishevent
+      publish: Product
+      consumes:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Send message to be published on event bus
+        required: true
+        schema:
+          $ref: '#/definitions/event'
+      responses:
+        "201":
+          description: created
+        "400":
+          description: bad input parameter
+definitions:
+  event:
+    type: object
+    required:
+    - message
+    - topic
+    properties:
+      topic:
+        type: string
+        example: mytopic
+      message:
+        type: string
+        example: mymessage
